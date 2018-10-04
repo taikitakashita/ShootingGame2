@@ -11,38 +11,56 @@ public class ShotCursor : MonoBehaviour
 
     private GameObject m_clearText;
 
-    private GameObject m_enemyGenerator;
-    private int m_maxEnemy;
-    private int m_enemyNum = 0;
+    private EnemyGenerator m_enemyGenerator;
+    private ResultTextController m_resultTextController;
+    private PowerController m_powerController;
 
+    //敵の最大数と倒した数の変数
+    private int m_maxEnemy;
+    private int m_enemyNum;
+
+    [SerializeField]
+    private GameObject m_item;
+
+    [SerializeField]
+    private int m_itemPower;
 
     void Start()
     {
         //　カーソルを自前のカーソルに変更
         Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
 
-        this.m_clearText = GameObject.Find("ClearText");
+        // ClearTextのオブジェクトの取得
+        m_clearText = GameObject.Find("ClearText");
 
-        m_enemyGenerator = GameObject.Find("EnemyGenerator");
-        m_maxEnemy = m_enemyGenerator.GetComponent<EnemyGenerator>().m_maxEnemy;
+        //MaxEnemyの値の取得
+        m_enemyGenerator = FindObjectOfType<EnemyGenerator>();
+        m_maxEnemy = m_enemyGenerator.MaxEnemy;
 
+        m_resultTextController = FindObjectOfType<ResultTextController>();
+
+        m_powerController = FindObjectOfType<PowerController>();
     }
 
     void Update()
     {
-        //　マウスの左クリックで撃つ
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Shot();
-        }
-        
+        // すべての敵を倒したらクリアを表示する
         if (m_enemyNum == m_maxEnemy)
         {
-            m_clearText.GetComponent<Text>().text = "Cleard !!";
-            if (Input.GetMouseButtonDown(1))
+            m_resultTextController.EndState = true;
+            m_resultTextController.ClearText();
+        }
+        else
+        {
+            if (m_resultTextController.EndState == false)
             {
-                SceneManager.LoadScene("GameScene");
+                //　マウスの左クリックで撃つ
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    Shot();
+                }
             }
+
         }
     }
 
@@ -68,7 +86,25 @@ public class ShotCursor : MonoBehaviour
                 //敵を倒した時のParticleを再生する。
                 hitParticle.transform.position = new Vector3(hitPosition.x, hitPosition.y, hitPosition.z);
                 hitParticle.GetComponent<ParticleSystem>().Play();
+
+                //回復アイテムを落とす
+
+                int num = Random.Range(1, 100);
+                if (num <= 20)
+                {
+                    GameObject item = Instantiate(m_item) as GameObject;
+                    item.transform.position = new Vector3(hitPosition.x, hitPosition.y, hitPosition.z);
+                    float itemRotx = Random.Range(0, 360);
+                    float itemRoty = Random.Range(0, 360);
+                    float itemRotz = Random.Range(0, 360);
+                    item.transform.rotation = Quaternion.Euler(itemRotx, itemRoty, itemRotz);
+                }
             }
+        }
+        if (Physics.Raycast(ray, out hit, 30f, LayerMask.GetMask("Item")))
+        {
+            Destroy(hit.collider.gameObject);
+            m_powerController.NowPowerUp(m_itemPower);
         }
     }
 }

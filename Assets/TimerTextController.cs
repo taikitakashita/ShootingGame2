@@ -7,34 +7,36 @@ using UnityEngine.SceneManagement;
 public class TimerTextController : MonoBehaviour
 {
     private GameObject m_timerText;
-    private GameObject m_gameOverText;
+
+    private ResultTextController m_resultTextController;
 
     [SerializeField]
-    private float m_remainingTime;
+    private float m_timeLimit;
 
     // Use this for initialization
     void Start()
     {
         this.m_timerText = GameObject.Find("TimerText");
-        this.m_gameOverText = GameObject.Find("GameOverText");
+        m_timerText.GetComponent<Text>().text = "Time " + m_timeLimit + "s";
+
+        m_resultTextController = FindObjectOfType<ResultTextController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_remainingTime >= 0)
+
+        if (m_resultTextController.EndState == false)
         {
-            m_remainingTime -= Time.deltaTime;
-            int seconds = (int)m_remainingTime;
+            m_timeLimit -= Time.deltaTime;
+            int seconds = (int)m_timeLimit;
             m_timerText.GetComponent<Text>().text = "Time " + seconds + "s";
         }
-        else
+
+        if (m_timeLimit <= 0)
         {
-            m_gameOverText.GetComponent<Text>().text = "GameOver";
-            if (Input.GetMouseButtonDown(1))
-            {
-                SceneManager.LoadScene("GameScene");
-            }
+            m_resultTextController.EndState = true;
+            m_resultTextController.GameOverText();
         }
     }
 }
