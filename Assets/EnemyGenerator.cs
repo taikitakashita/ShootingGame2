@@ -44,7 +44,7 @@ public class EnemyGenerator : MonoBehaviour
             {
                 //Enemy2を生成
                 GameObject enemy2 = Instantiate(m_enemyArray[1]) as GameObject;
-                enemy2.transform.position = new Vector3(Enemy_posx, 10, Enemy_posz);
+                enemy2.transform.position = new Vector3(Enemy_posx, 30, Enemy_posz);
                 m_enemyNum += 1;
             }
             else if (7 <= num && num <= 9)
