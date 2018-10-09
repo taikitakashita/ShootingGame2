@@ -2513,7 +2513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0f74a795cfe6e344897c3b31e6c502a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_moveSpeed: 10
+  m_moveSpeed: 5
   m_enemyDamage: 5
   m_moveStopDistance: 5
   m_attackSound: {fileID: 8300000, guid: 6d196aea4abbec94c882572a2947c6be, type: 3}

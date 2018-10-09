@@ -97,10 +97,10 @@ public class ShotCursor : MonoBehaviour
 
                 //回復アイテムを落とす
                 int num = Random.Range(1, 100);
-                if (num <= 20)
+                if (num <= 40)
                 {
                     item = Instantiate(m_item) as GameObject;
-                    item.transform.position = new Vector3(hitPosition.x, hitPosition.y, hitPosition.z);
+                    item.transform.position = new Vector3(hitPosition.x, hitPosition.y + 1, hitPosition.z);
                     float itemRotx = Random.Range(0, 360);
                     float itemRoty = Random.Range(0, 360);
                     float itemRotz = Random.Range(0, 360);

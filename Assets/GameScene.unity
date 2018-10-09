@@ -853,9 +853,9 @@ MonoBehaviour:
   cursor: {fileID: 2800000, guid: 3c0be8800c668a84b906a6d8007822ee, type: 3}
   m_item: {fileID: 1909175568669926, guid: ff601e87121486544a47e50d07009397, type: 2}
   m_itemPower: 5
-  m_shotEffect: {fileID: 1261499089166540, guid: 2087fde631e4e064bbd8def17b76c747,
+  m_shotEffect: {fileID: 1253026156299936, guid: 2087fde631e4e064bbd8def17b76c747,
     type: 2}
-  m_itemEffect: {fileID: 1516937595534078, guid: ba5a73a14120d0e4d8a4f56c94f9e7b3,
+  m_itemEffect: {fileID: 1686156236462158, guid: ba5a73a14120d0e4d8a4f56c94f9e7b3,
     type: 2}
   m_attackSound: {fileID: 8300000, guid: e5ffe5ad56ed84f80b79cf081c6d0209, type: 3}
 --- !u!45 &1327533468

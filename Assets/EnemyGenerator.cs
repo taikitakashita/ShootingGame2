@@ -26,8 +26,8 @@ public class EnemyGenerator : MonoBehaviour
     void Update()
     {
         //Enemyを出現させる座標の設定
-        int Enemy_posx = Random.Range(-100, 100);
-        int Enemy_posz = Random.Range(-100, 100);
+        int Enemy_posx = Random.Range(-80, 80);
+        int Enemy_posz = Random.Range(-80, 80);
 
         int num = Random.Range(1, 200);
 
@@ -44,7 +44,7 @@ public class EnemyGenerator : MonoBehaviour
             {
                 //Enemy2を生成
                 GameObject enemy2 = Instantiate(m_enemyArray[1]) as GameObject;
-                enemy2.transform.position = new Vector3(Enemy_posx, 30, Enemy_posz);
+                enemy2.transform.position = new Vector3(Enemy_posx, 20, Enemy_posz);
                 m_enemyNum += 1;
             }
             else if (7 <= num && num <= 9)
