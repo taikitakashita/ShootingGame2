@@ -23,6 +23,17 @@ public class ShotCursor : MonoBehaviour
     [SerializeField]
     private int m_itemPower;
 
+    [SerializeField]
+    private GameObject m_shotEffect;
+
+    [SerializeField]
+    private GameObject m_itemEffect;
+
+    private AudioSource m_audioSource;
+
+    [SerializeField]
+    private AudioClip m_attackSound;
+
     void Start()
     {
         //　カーソルを自前のカーソルに変更
@@ -35,6 +46,8 @@ public class ShotCursor : MonoBehaviour
         m_resultTextController = FindObjectOfType<ResultTextController>();
 
         m_powerController = FindObjectOfType<PowerController>();
+
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -65,29 +78,28 @@ public class ShotCursor : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Vector3 hitPosition;
-        GameObject hitParticle = GameObject.Find("HitParticle");
+        GameObject item;
 
         if (Physics.Raycast(ray, out hit, 30f, LayerMask.GetMask("Enemy")))
         {
+            hitPosition = hit.point;
             hit.collider.gameObject.GetComponentInChildren<Canvas>().GetComponentInChildren<Slider>().value -= 1;
+
+            //敵に攻撃した時のParticleを再生する。
+            Instantiate(m_shotEffect, hitPosition, Quaternion.identity);
+            m_audioSource.PlayOneShot(m_attackSound);
 
             if (hit.collider.gameObject.GetComponentInChildren<Canvas>().GetComponentInChildren<Slider>().value == 0)
             {
                 //敵のオブジェクトを消す
-                hitPosition = hit.collider.gameObject.GetComponent<Collider>().bounds.center;
                 Destroy(hit.collider.gameObject);
                 m_enemyNum += 1;
 
-                //敵を倒した時のParticleを再生する。
-                hitParticle.transform.position = new Vector3(hitPosition.x, hitPosition.y, hitPosition.z);
-                hitParticle.GetComponent<ParticleSystem>().Play();
-
                 //回復アイテムを落とす
-
                 int num = Random.Range(1, 100);
                 if (num <= 20)
                 {
-                    GameObject item = Instantiate(m_item) as GameObject;
+                    item = Instantiate(m_item) as GameObject;
                     item.transform.position = new Vector3(hitPosition.x, hitPosition.y, hitPosition.z);
                     float itemRotx = Random.Range(0, 360);
                     float itemRoty = Random.Range(0, 360);
@@ -96,8 +108,12 @@ public class ShotCursor : MonoBehaviour
                 }
             }
         }
+
+        //回復アイテムを打った時のParticleを再生する。
         if (Physics.Raycast(ray, out hit, 30f, LayerMask.GetMask("Item")))
         {
+            hitPosition = hit.point;
+            Instantiate(m_itemEffect, hitPosition, Quaternion.identity);
             Destroy(hit.collider.gameObject);
             m_powerController.NowPowerUp(m_itemPower);
         }
