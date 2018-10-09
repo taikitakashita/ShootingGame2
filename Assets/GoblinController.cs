@@ -17,7 +17,7 @@ public class GoblinController : MonoBehaviour
     private int m_enemyDamage;
 
     [SerializeField]
-    private int m_stopDistance;
+    private int m_moveStopDistance;
 
     // Use this for initialization
     void Start()
@@ -41,13 +41,12 @@ public class GoblinController : MonoBehaviour
         float distance = Vector3.Distance(NowPosition, TargetPosition);
         float step = m_moveSpeed * Time.deltaTime;
 
-        bool block = Physics.Linecast(NowPosition, TargetPosition);
+        this.transform.LookAt(TargetPosition);
 
-        if (distance > m_stopDistance )
+        if (distance > m_moveStopDistance )
         {
             transform.position = Vector3.MoveTowards(NowPosition, TargetPosition, step);
             m_anim.SetInteger("moving", 2);
-            this.transform.LookAt(TargetPosition);
         }
         else
         {

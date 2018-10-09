@@ -17,7 +17,7 @@ public class DragonController : MonoBehaviour
     private int m_enemyDamage;
 
     [SerializeField]
-    private int m_stopDistance;
+    private int m_moveStopDistance;
 
     // Use this for initialization
     void Start()
@@ -40,11 +40,12 @@ public class DragonController : MonoBehaviour
         float distance = Vector3.Distance(NowPosition, TargetPosition);
         float step = m_moveSpeed * Time.deltaTime;
 
-        if (distance > m_stopDistance)
+        this.transform.LookAt(TargetPosition);
+
+        if (distance > m_moveStopDistance)
         {
             transform.position = Vector3.MoveTowards(NowPosition, TargetPosition, step);
             m_anim.SetInteger("moving", 1);
-            this.transform.LookAt(TargetPosition);
         }
         else
         {
@@ -56,7 +57,6 @@ public class DragonController : MonoBehaviour
                 if (num < 2)
                 {
                     m_anim.SetInteger("moving", 2);
-                    Debug.Log("Dragon Hit");
                     m_damageImage.GetComponent<Image>().color = new Color(0.5f, 0f, 0f, 0.5f);
                     m_powerController.NowPowerDown(m_enemyDamage);
                 }

@@ -26,8 +26,8 @@ public class EnemyGenerator : MonoBehaviour
     void Update()
     {
         //Enemyを出現させる座標の設定
-        int Enemy_posx = Random.Range(-30, 30);
-        int Enemy_posz = Random.Range(40, 50);
+        int Enemy_posx = Random.Range(-100, 100);
+        int Enemy_posz = Random.Range(-100, 100);
 
         int num = Random.Range(1, 200);
 

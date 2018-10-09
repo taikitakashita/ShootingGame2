@@ -23,7 +23,7 @@ public class ResultTextController : MonoBehaviour {
     public void ClearText()
     {
         m_resultText = GameObject.Find("ResultText");
-        m_resultText.GetComponent<Text>().color = new Color(1, 1, 0, 1);
+        m_resultText.GetComponent<Text>().color = new Color(1, 1, 1, 1);
         m_resultText.GetComponent<Text>().text = "Cleard !!";
         if (Input.GetButtonDown("Fire1"))
         {

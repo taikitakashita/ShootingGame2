@@ -9,8 +9,6 @@ public class ShotCursor : MonoBehaviour
     [SerializeField]
     private Texture2D cursor;
 
-    private GameObject m_clearText;
-
     private EnemyGenerator m_enemyGenerator;
     private ResultTextController m_resultTextController;
     private PowerController m_powerController;
@@ -29,9 +27,6 @@ public class ShotCursor : MonoBehaviour
     {
         //　カーソルを自前のカーソルに変更
         Cursor.SetCursor(cursor, new Vector2(cursor.width / 2, cursor.height / 2), CursorMode.ForceSoftware);
-
-        // ClearTextのオブジェクトの取得
-        m_clearText = GameObject.Find("ClearText");
 
         //MaxEnemyの値の取得
         m_enemyGenerator = FindObjectOfType<EnemyGenerator>();
@@ -106,5 +101,12 @@ public class ShotCursor : MonoBehaviour
             Destroy(hit.collider.gameObject);
             m_powerController.NowPowerUp(m_itemPower);
         }
+    }
+
+    //EnemyNumの値をget,setするためのプロパティ
+    public int EnemyNum
+    {
+        get { return m_enemyNum; }
+        private set { m_enemyNum = value; }
     }
 }
