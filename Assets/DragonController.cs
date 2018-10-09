@@ -19,6 +19,11 @@ public class DragonController : MonoBehaviour
     [SerializeField]
     private int m_moveStopDistance;
 
+    private AudioSource m_audioSource;
+
+    [SerializeField]
+    private AudioClip m_attackSound;
+
     // Use this for initialization
     void Start()
     {
@@ -29,6 +34,8 @@ public class DragonController : MonoBehaviour
 
         m_damageImage = GameObject.Find("DamageImage");
         m_damageImage.GetComponent<Image>().color = Color.clear;
+
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -59,6 +66,7 @@ public class DragonController : MonoBehaviour
                     m_anim.SetInteger("moving", 2);
                     m_damageImage.GetComponent<Image>().color = new Color(0.5f, 0f, 0f, 0.5f);
                     m_powerController.NowPowerDown(m_enemyDamage);
+                    m_audioSource.PlayOneShot(m_attackSound);
                 }
                 m_damageImage.GetComponent<Image>().color = Color.Lerp(m_damageImage.GetComponent<Image>().color, Color.clear, Time.deltaTime);
             }
