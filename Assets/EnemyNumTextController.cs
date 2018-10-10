@@ -25,7 +25,6 @@ public class EnemyNumTextController : MonoBehaviour {
         m_enemyNum = m_shotCursor.EnemyNum;
 
         m_enemyNumText = GameObject.Find("EnemyNumText");
-        Debug.Log(m_enemyNumText);
         m_enemyNumText.GetComponent<TextMeshProUGUI>().text = "Enemy " + m_maxEnemy + " / " + m_maxEnemy;
     }
 	

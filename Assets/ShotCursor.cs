@@ -65,7 +65,7 @@ public class ShotCursor : MonoBehaviour
                 //　マウスの左クリックで撃つ
                 if (Input.GetButtonDown("Fire1"))
                 {
-                    Shot();
+                    ShotEnemy();
                 }
             }
 
@@ -73,7 +73,7 @@ public class ShotCursor : MonoBehaviour
     }
 
     //　敵を撃つ
-    void Shot()
+    void ShotEnemy()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
