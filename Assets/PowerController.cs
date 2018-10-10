@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PowerController : MonoBehaviour {
 
@@ -22,7 +23,7 @@ public class PowerController : MonoBehaviour {
         m_powerSlider.GetComponent<Slider>().value = m_maxPower;
 
         m_powerText = GameObject.Find("PowerText");
-        m_powerText.GetComponent<Text>().text = "Power " + m_maxPower + " / " + m_maxPower;
+        m_powerText.GetComponent<TextMeshProUGUI>().text = "Power " + m_maxPower + " / " + m_maxPower;
         m_resultTextController = FindObjectOfType<ResultTextController>();
     }
 	
@@ -46,7 +47,7 @@ public class PowerController : MonoBehaviour {
         m_nowPower -= damage;
 
         m_powerSlider.GetComponent<Slider>().value = m_nowPower;
-        m_powerText.GetComponent<Text>().text = "Power " + m_nowPower + " / " + m_maxPower;
+        m_powerText.GetComponent<TextMeshProUGUI>().text = "Power " + m_nowPower + " / " + m_maxPower;
     }
 
     //現在の体力の値とスライダーを増やす関数
@@ -62,6 +63,6 @@ public class PowerController : MonoBehaviour {
             m_nowPower = m_maxPower;
         }
         m_powerSlider.GetComponent<Slider>().value = m_nowPower;
-        m_powerText.GetComponent<Text>().text = "Power " + m_nowPower + " / " + m_maxPower;
+        m_powerText.GetComponent<TextMeshProUGUI>().text = "Power " + m_nowPower + " / " + m_maxPower;
     }
 }

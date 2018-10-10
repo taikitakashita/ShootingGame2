@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ResultTextController : MonoBehaviour {
 
@@ -22,9 +23,8 @@ public class ResultTextController : MonoBehaviour {
     //クリアを表示する関数
     public void ClearText()
     {
-        m_resultText = GameObject.Find("ResultText");
-        m_resultText.GetComponent<Text>().color = new Color(1, 1, 1, 1);
-        m_resultText.GetComponent<Text>().text = "Cleard !!";
+        m_resultText = GameObject.Find("ClearText");
+        m_resultText.GetComponent<TextMeshProUGUI>().text = "Cleard !!";
         if (Input.GetButtonDown("Fire1"))
         {
             SceneManager.LoadScene("GameScene");
@@ -34,9 +34,8 @@ public class ResultTextController : MonoBehaviour {
     //ゲームオーバーを表示する関数
     public void GameOverText()
     {
-        m_resultText = GameObject.Find("ResultText");
-        m_resultText.GetComponent<Text>().color = new Color(1, 0, 0, 1);
-        m_resultText.GetComponent<Text>().text = "Game Over";
+        m_resultText = GameObject.Find("GameOverText");
+        m_resultText.GetComponent<TextMeshProUGUI>().text = "Game Over";
         if (Input.GetButtonDown("Fire1"))
         {
             SceneManager.LoadScene("GameScene");

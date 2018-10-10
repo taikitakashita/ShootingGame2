@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class TimerTextController : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class TimerTextController : MonoBehaviour
     void Start()
     {
         this.m_timerText = GameObject.Find("TimerText");
-        m_timerText.GetComponent<Text>().text = "Time " + m_timeLimit + "s";
+        m_timerText.GetComponent<TextMeshProUGUI>().text = "Time " + m_timeLimit + "s";
 
         m_resultTextController = FindObjectOfType<ResultTextController>();
     }
@@ -30,7 +31,7 @@ public class TimerTextController : MonoBehaviour
         {
             m_timeLimit -= Time.deltaTime;
             int seconds = (int)m_timeLimit;
-            m_timerText.GetComponent<Text>().text = "Time " + seconds + "s";
+            m_timerText.GetComponent<TextMeshProUGUI>().text = "Time " + seconds + "s";
         }
 
         if (m_timeLimit <= 0)

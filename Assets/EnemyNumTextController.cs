@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EnemyNumTextController : MonoBehaviour {
 
@@ -23,13 +24,14 @@ public class EnemyNumTextController : MonoBehaviour {
         m_shotCursor = FindObjectOfType<ShotCursor>();
         m_enemyNum = m_shotCursor.EnemyNum;
 
-        this.m_enemyNumText = GameObject.Find("EnemyNumText");
-        m_enemyNumText.GetComponent<Text>().text = "Enemy " + m_maxEnemy + " / " + m_maxEnemy;
+        m_enemyNumText = GameObject.Find("EnemyNumText");
+        Debug.Log(m_enemyNumText);
+        m_enemyNumText.GetComponent<TextMeshProUGUI>().text = "Enemy " + m_maxEnemy + " / " + m_maxEnemy;
     }
 	
 	// Update is called once per frame
 	void Update () {
         m_enemyNum = m_shotCursor.EnemyNum;
-        m_enemyNumText.GetComponent<Text>().text = "Enemy " + (m_maxEnemy - m_enemyNum) + " / " + m_maxEnemy;
+        m_enemyNumText.GetComponent<TextMeshProUGUI>().text = "Enemy " + (m_maxEnemy - m_enemyNum) + " / " + m_maxEnemy;
     }
 }
