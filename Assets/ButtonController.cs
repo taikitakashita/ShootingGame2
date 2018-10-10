@@ -47,7 +47,7 @@ public class ButtonController : MonoBehaviour {
         m_stopButton.SetActive(true);
         m_startButton.SetActive(false);
         m_retryButton.SetActive(false);
-
+        Time.timeScale = 1;
         SceneManager.LoadScene("GameScene");
     }
 }
