@@ -27,6 +27,7 @@ public class ResultTextController : MonoBehaviour {
         m_resultText.GetComponent<TextMeshProUGUI>().text = "Cleard !!";
         if (Input.GetButtonDown("Fire1"))
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene("GameScene");
         }
     }
@@ -38,6 +39,7 @@ public class ResultTextController : MonoBehaviour {
         m_resultText.GetComponent<TextMeshProUGUI>().text = "Game Over";
         if (Input.GetButtonDown("Fire1"))
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene("GameScene");
         }
     }
