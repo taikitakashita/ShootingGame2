@@ -9,6 +9,8 @@ public class ButtonController : MonoBehaviour {
     GameObject m_startButton;
     GameObject m_retryButton;
 
+    private bool m_stopState;
+
 
     // Use this for initialization
     void Start () {
@@ -29,6 +31,7 @@ public class ButtonController : MonoBehaviour {
         m_stopButton.SetActive(false);
         m_startButton.SetActive(true);
         m_retryButton.SetActive(true);
+        m_stopState = true;
 
         Time.timeScale = 0;
     }
@@ -39,6 +42,7 @@ public class ButtonController : MonoBehaviour {
         m_startButton.SetActive(false);
         m_retryButton.SetActive(false);
 
+        m_stopState = false;
         Time.timeScale = 1;
     }
 
@@ -47,7 +51,16 @@ public class ButtonController : MonoBehaviour {
         m_stopButton.SetActive(true);
         m_startButton.SetActive(false);
         m_retryButton.SetActive(false);
+
+        m_stopState = false;
         Time.timeScale = 1;
         SceneManager.LoadScene("GameScene");
+    }
+
+    //StopStateの値をget,setするためのプロパティ
+    public bool StopState
+    {
+        get { return m_stopState; }
+        private set { m_stopState = value; }
     }
 }

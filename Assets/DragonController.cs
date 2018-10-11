@@ -9,6 +9,7 @@ public class DragonController : MonoBehaviour
     private ResultTextController m_resultTextController;
     private PowerController m_powerController;
     private Animator m_anim;
+    private ButtonController m_buttonController;
 
     [SerializeField]
     private float m_moveSpeed;
@@ -36,6 +37,8 @@ public class DragonController : MonoBehaviour
         m_damageImage.GetComponent<Image>().color = Color.clear;
 
         m_audioSource = GetComponent<AudioSource>();
+
+        m_buttonController = FindObjectOfType<ButtonController>();
     }
 
     // Update is called once per frame
@@ -49,26 +52,29 @@ public class DragonController : MonoBehaviour
 
         this.transform.LookAt(TargetPosition);
 
-        if (distance > m_moveStopDistance)
+        if (m_buttonController.StopState == false)
         {
-            transform.position = Vector3.MoveTowards(NowPosition, TargetPosition, step);
-            m_anim.SetInteger("moving", 1);
-        }
-        else
-        {
-            m_anim.SetInteger("moving", 0);
-
-            if (m_resultTextController.EndState == false)
+            if (distance > m_moveStopDistance)
             {
-                int num = Random.Range(1, 300);
-                if (num < 2)
+                transform.position = Vector3.MoveTowards(NowPosition, TargetPosition, step);
+                m_anim.SetInteger("moving", 1);
+            }
+            else
+            {
+                m_anim.SetInteger("moving", 0);
+
+                if (m_resultTextController.EndState == false)
                 {
-                    m_anim.SetInteger("moving", 2);
-                    m_damageImage.GetComponent<Image>().color = new Color(0.5f, 0f, 0f, 0.5f);
-                    m_powerController.NowPowerDown(m_enemyDamage);
-                    m_audioSource.PlayOneShot(m_attackSound);
+                    int num = Random.Range(1, 300);
+                    if (num < 2)
+                    {
+                        m_anim.SetInteger("moving", 2);
+                        m_damageImage.GetComponent<Image>().color = new Color(0.5f, 0f, 0f, 0.5f);
+                        m_powerController.NowPowerDown(m_enemyDamage);
+                        m_audioSource.PlayOneShot(m_attackSound);
+                    }
+                    m_damageImage.GetComponent<Image>().color = Color.Lerp(m_damageImage.GetComponent<Image>().color, Color.clear, Time.deltaTime);
                 }
-                m_damageImage.GetComponent<Image>().color = Color.Lerp(m_damageImage.GetComponent<Image>().color, Color.clear, Time.deltaTime);
             }
         }
     }

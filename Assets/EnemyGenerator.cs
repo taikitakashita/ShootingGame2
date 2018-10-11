@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyGenerator : MonoBehaviour
 {
 
+    private ButtonController m_buttonController;
+
     //EnemyPrefabを入れる
     [SerializeField]
     private GameObject[] m_enemyArray;
@@ -19,7 +21,7 @@ public class EnemyGenerator : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        m_buttonController = FindObjectOfType<ButtonController>();
     }
 
     // Update is called once per frame
@@ -31,7 +33,7 @@ public class EnemyGenerator : MonoBehaviour
 
         int num = Random.Range(1, 200);
 
-        if (m_enemyNum < m_maxEnemy)
+        if (m_enemyNum < m_maxEnemy && m_buttonController.StopState == false)
         {
             if (1 <= num && num <= 4)
             {

@@ -24,7 +24,7 @@ public class ResultTextController : MonoBehaviour {
     public void ClearText()
     {
         m_resultText = GameObject.Find("ClearText");
-        m_resultText.GetComponent<TextMeshProUGUI>().text = "Cleard !!";
+        m_resultText.GetComponent<TextMeshProUGUI>().text = "Cleared !!";
         if (Input.GetButtonDown("Fire1"))
         {
             Time.timeScale = 1;

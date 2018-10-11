@@ -12,6 +12,7 @@ public class ShotCursor : MonoBehaviour
     private EnemyGenerator m_enemyGenerator;
     private ResultTextController m_resultTextController;
     private PowerController m_powerController;
+    private ButtonController m_buttonController;
 
     //敵の最大数と倒した数の変数
     private int m_maxEnemy;
@@ -48,6 +49,8 @@ public class ShotCursor : MonoBehaviour
         m_powerController = FindObjectOfType<PowerController>();
 
         m_audioSource = GetComponent<AudioSource>();
+
+        m_buttonController = FindObjectOfType<ButtonController>();
     }
 
     void Update()
@@ -60,7 +63,7 @@ public class ShotCursor : MonoBehaviour
         }
         else
         {
-            if (m_resultTextController.EndState == false)
+            if (m_resultTextController.EndState == false && m_buttonController.StopState == false)
             {
                 //　マウスの左クリックで撃つ
                 if (Input.GetButtonDown("Fire1"))
